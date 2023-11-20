@@ -1,157 +1,76 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Diagnostics;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 
-namespace ConAssignmentQuickSort
+namespace ConAppAssignQuickSort
 {
     internal class Program
     {
-        public static void QuickSort(int[] array)
+        public static void quicksort(int[] array)
         {
-            QuickSort(array, 0, array.Length - 1);
+            quicksort(array, 0, array.Length - 1);
         }
-
-        private static void QuickSort(int[] array, int left, int right)
+        private static void quicksort(int[] array, int left, int right)
         {
             if (left < right)
             {
-                int pivotIndex = Partition(array, left, right);
-
-                QuickSort(array, left, pivotIndex - 1);
-                QuickSort(array, pivotIndex + 1, right);
+                int pivotindex = Partition(array, left, right);
+                quicksort(array, left, pivotindex - 1);
+                quicksort(array, pivotindex + 1, right);
             }
         }
-
         private static int Partition(int[] array, int left, int right)
         {
             int pivot = array[right];
             int i = left - 1;
-
             for (int j = left; j < right; j++)
             {
                 if (array[j] < pivot)
                 {
                     i++;
-                    Swap(array, i, j);
+                    swap(array, i, j);
                 }
             }
-
-            Swap(array, i + 1, right);
+            swap(array, i + 1, right);
             return i + 1;
         }
 
-        static void Swap(int[] array, int i, int j)
+        private static void swap(int[] array, int i, int j)
         {
             int temp = array[i];
             array[i] = array[j];
             array[j] = temp;
         }
 
-        public static void Print(int[] array)
+
+
+        public static void merge(int[] arr, int l, int m, int r)
         {
-            for (int i = 0; i < array.Length; i++)
-            {
-                Console.Write(array[i] + " ");
-            }
-            Console.WriteLine("\n");
-        }
-
-        static void MeasureQuicksortPerformance(int arraySize)
-        {
-            int[] array = GenerateRandomArray(arraySize);
-
-            Stopwatch stopwatch = new Stopwatch();
-            stopwatch.Start();
-
-            QuickSort(array, 0, array.Length - 1);
-
-            stopwatch.Stop();
-
-            Console.WriteLine($"Array size: {arraySize}, Time taken: {stopwatch.ElapsedMilliseconds} ms, Sorted correctly: {IsSorted(array)}");
-        }
-
-        static int[] GenerateRandomArray(int size)
-        {
-            Random random = new Random();
-            int[] array = new int[size];
-
-            for (int i = 0; i < size; i++)
-            {
-                array[i] = random.Next(1000); // Adjust the range as needed
-            }
-
-            return array;
-        }
-
-        // Method to check if the array is sorted
-        public static bool IsSorted(int[] array)
-        {
-            for (int i = 1; i < array.Length; i++)
-            {
-                if (array[i - 1] > array[i])
-                    return false;
-            }
-            return true;
-        }
-
-        // Method to compare quicksort with merge sort
-        static void CompareSortAlgorithms(int arraySize)
-        {
-            int[] quicksortArray = GenerateRandomArray(arraySize);
-            int[] mergesortArray = CopyArray(quicksortArray);
-
-            // Measure quicksort performance
-            Stopwatch quicksortStopwatch = new Stopwatch();
-            quicksortStopwatch.Start();
-            QuickSort(quicksortArray, 0, quicksortArray.Length - 1);
-            quicksortStopwatch.Stop();
-
-            Console.WriteLine($"Quicksort - Array size: {arraySize}, Time taken: {quicksortStopwatch.ElapsedMilliseconds} ms, Sorted correctly: {IsSorted(quicksortArray)}");
-
-            // Measure mergesort performance
-            Stopwatch mergesortStopwatch = new Stopwatch();
-            mergesortStopwatch.Start();
-            MergeSort(mergesortArray, 0, mergesortArray.Length - 1);
-            mergesortStopwatch.Stop();
-
-            Console.WriteLine($"Mergesort - Array size: {arraySize}, Time taken: {mergesortStopwatch.ElapsedMilliseconds} ms, Sorted correctly: {IsSorted(mergesortArray)}");
-        }
-
-        // Merge sort implementation
-        public static void MergeSort(int[] array, int left, int right)
-        {
-            if (left < right)
-            {
-                int mid = (left + right) / 2;
-                MergeSort(array, left, mid);
-                MergeSort(array, mid + 1, right);
-                Merge(array, left, mid, right);
-            }
-        }
-
-        private static void Merge(int[] array, int left, int mid, int right)
-        {
-            int n1 = mid - left + 1;
-            int n2 = right - mid;
-
-            int[] leftArray = new int[n1];
-            int[] rightArray = new int[n2];
-
-            Array.Copy(array, left, leftArray, 0, n1);
-            Array.Copy(array, mid + 1, rightArray, 0, n2);
-
-            int i = 0, j = 0;
-            int k = left;
-
+            int n1 = m - l + 1;
+            int n2 = r - m;
+            int[] L = new int[n1];
+            int[] R = new int[n2];
+            int i, j;
+            for (i = 0; i < n1; ++i)
+                L[i] = arr[l + i];
+            for (j = 0; j < n2; ++j)
+                R[j] = arr[m + 1 + j];
+            i = 0;
+            j = 0;
+            int k = l;
             while (i < n1 && j < n2)
             {
-                if (leftArray[i] <= rightArray[j])
+                if (L[i] <= R[j])
                 {
-                    array[k] = leftArray[i];
+                    arr[k] = L[i];
                     i++;
                 }
                 else
                 {
-                    array[k] = rightArray[j];
+                    arr[k] = R[j];
                     j++;
                 }
                 k++;
@@ -159,43 +78,88 @@ namespace ConAssignmentQuickSort
 
             while (i < n1)
             {
-                array[k] = leftArray[i];
+                arr[k] = L[i];
                 i++;
                 k++;
             }
-
             while (j < n2)
             {
-                array[k] = rightArray[j];
+                arr[k] = R[j];
                 j++;
                 k++;
             }
         }
-
-        // Method to copy an array
-        public static int[] CopyArray(int[] array)
+        public static void sort(int[] arr, int l, int r)
         {
-            int[] copy = new int[array.Length];
-            Array.Copy(array, copy, array.Length);
-            return copy;
+            if (l < r)
+            {
+
+                int m = l + (r - l) / 2;
+
+                sort(arr, l, m);
+                sort(arr, m + 1, r);
+
+                merge(arr, l, m, r);
+            }
         }
+
+
+        public static void Print(int[] arr)
+        {
+            Console.Write("{ ");
+            foreach (var i in arr)
+            {
+                Console.Write(i + " ");
+            }
+            Console.Write(" }\n");
+        }
+
+        public static bool IsSorted(int[] arr)
+        {
+            for (int i = 1; i < arr.Length; i++)
+            {
+                if (arr[i] < arr[i - 1])
+                    return false;
+            }
+            return true;
+        }
+
 
         static void Main(string[] args)
         {
-            int[] array = { 5, 2, 4, 9, 7 };
-            Console.WriteLine("Original Array is:");
-            Print(array);
 
-            // Measure Quicksort performance for the provided array
-            MeasureQuicksortPerformance(array.Length);
+            int[] arr = { 12, 7, 3, 1, 8, 9, 15, 4, 5 };
+            Console.WriteLine("original array for Quick Sort is \n");
+            Print(arr);
+            Stopwatch stopwatch1 = new Stopwatch();
+            stopwatch1.Start();
+            quicksort(arr);
+            stopwatch1.Stop();
+            Console.WriteLine("\nAfter applying quick sort elements are in ascending order\n");
+            Print(arr);
 
-            // Compare Quicksort with Merge Sort for various array sizes
-            Console.WriteLine("\nComparison of Quicksort and Merge Sort:");
+            int[] arr1 = { 12, 7, 3, 1, 8, 9, 15, 4, 5 };
+            Console.WriteLine("\nOriginal array for Merge sort array is \n");
+            Print(arr1);
+            Stopwatch stopwatch2 = new Stopwatch();
+            stopwatch2.Start();
+            sort(arr1, 0, arr1.Length - 1);
+            stopwatch2.Stop();
+            Console.WriteLine("\nAfter Merge Sorted array is\n");
+            Print(arr1);
 
-            CompareSortAlgorithms(5);
-           
+
+            Console.WriteLine("\nIs the array sorted correctly ?  " + IsSorted(arr1));
+            Console.WriteLine($"\nArray size is {arr1.Length} \nTime Taken for quick sort is {stopwatch1.Elapsed.TotalMilliseconds} milliseconds  \nTime Taken for merge sort is {stopwatch2.Elapsed.TotalMilliseconds} milliseconds");
+
+
+
+
 
             Console.ReadKey();
+
+
+
         }
     }
 }
