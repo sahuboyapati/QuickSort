@@ -128,7 +128,7 @@ namespace ConAppAssignQuickSort
         static void Main(string[] args)
         {
 
-            int[] arr = { 12, 7, 3, 1, 8, 9, 15, 4, 5 };
+            int[] arr = {  4, 5, 12, 7, 3, 10, 9, 15};
             Console.WriteLine("original array for Quick Sort is \n");
             Print(arr);
             Stopwatch stopwatch1 = new Stopwatch();
@@ -138,7 +138,7 @@ namespace ConAppAssignQuickSort
             Console.WriteLine("\nAfter applying quick sort elements are in ascending order\n");
             Print(arr);
 
-            int[] arr1 = { 12, 7, 3, 1, 8, 9, 15, 4, 5 };
+            int[] arr1 = { 4, 5, 12, 7, 3, 10, 9, 15 };
             Console.WriteLine("\nOriginal array for Merge sort array is \n");
             Print(arr1);
             Stopwatch stopwatch2 = new Stopwatch();
