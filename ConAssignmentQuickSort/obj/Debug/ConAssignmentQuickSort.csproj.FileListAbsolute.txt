@@ -1,0 +1,7 @@
+C:\Users\Boyapati Sahaja\OneDrive\Desktop\Day11\ConAssignmentQuickSort\ConAssignmentQuickSort\bin\Debug\ConAssignmentQuickSort.exe.config
+C:\Users\Boyapati Sahaja\OneDrive\Desktop\Day11\ConAssignmentQuickSort\ConAssignmentQuickSort\bin\Debug\ConAssignmentQuickSort.exe
+C:\Users\Boyapati Sahaja\OneDrive\Desktop\Day11\ConAssignmentQuickSort\ConAssignmentQuickSort\bin\Debug\ConAssignmentQuickSort.pdb
+C:\Users\Boyapati Sahaja\OneDrive\Desktop\Day11\ConAssignmentQuickSort\ConAssignmentQuickSort\obj\Debug\ConAssignmentQuickSort.csproj.AssemblyReference.cache
+C:\Users\Boyapati Sahaja\OneDrive\Desktop\Day11\ConAssignmentQuickSort\ConAssignmentQuickSort\obj\Debug\ConAssignmentQuickSort.csproj.CoreCompileInputs.cache
+C:\Users\Boyapati Sahaja\OneDrive\Desktop\Day11\ConAssignmentQuickSort\ConAssignmentQuickSort\obj\Debug\ConAssignmentQuickSort.exe
+C:\Users\Boyapati Sahaja\OneDrive\Desktop\Day11\ConAssignmentQuickSort\ConAssignmentQuickSort\obj\Debug\ConAssignmentQuickSort.pdb
